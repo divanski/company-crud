@@ -10,11 +10,7 @@ use App\Models\Company;
  */
 class CompanyRepository extends BaseRepository
 {
-    /**
-     * @return string
-     *  Return the model
-     */
-    public function model()
+    public function model(): string
     {
         return Company::class;
     }
@@ -52,10 +48,6 @@ class CompanyRepository extends BaseRepository
         $company->groups()->sync($groupIds);
     }
 
-    /**
-     * @param $id
-     * @return Builder|Builder[]|Collection|Model|null
-     */
     public function getCompanyById($id)
     {
         return $this->model->with('groups')->find($id);
@@ -74,7 +66,7 @@ class CompanyRepository extends BaseRepository
      * @param $id
      * @return mixed
      */
-    public function deleteCompany($id)
+    public function deleteCompany($id): mixed
     {
         return $this->model->find($id)->delete();
     }
