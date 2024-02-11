@@ -1,0 +1,79 @@
+<?php
+
+namespace App\Repositories;
+
+use JasonGuru\LaravelMakeRepository\Repository\BaseRepository;
+use App\Models\Company;
+
+/**
+ * Class CompanyRepository.
+ */
+class CompanyRepository extends BaseRepository
+{
+    /**
+     * @return string
+     *  Return the model
+     */
+    public function model()
+    {
+        return Company::class;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getAllCompaniesWithGroups()
+    {
+        return $this->model->with('groups')->orderBy('created_at', 'desc')->get();
+    }
+
+    /**
+     * @param $data
+     * @return mixed
+     */
+    public function storeOrUpdateCompany($data)
+    {
+        if (isset($data['company_id'])) {
+            return $this->model->updateOrCreate(['id' => $data['company_id']], $data);
+        } else {
+            return $this->model->create($data);
+        }
+    }
+
+    /**
+     * @param Company $company
+     * @param $groupIds
+     * @return void
+     */
+    public function syncGroups(Company $company, $groupIds)
+    {
+        $company->groups()->sync($groupIds);
+    }
+
+    /**
+     * @param $id
+     * @return Builder|Builder[]|Collection|Model|null
+     */
+    public function getCompanyById($id)
+    {
+        return $this->model->with('groups')->find($id);
+    }
+
+    /**
+     * @param $company
+     * @return void
+     */
+    public function removeAllGroups($company)
+    {
+        $company->groups()->detach();
+    }
+
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function deleteCompany($id)
+    {
+        return $this->model->find($id)->delete();
+    }
+}
