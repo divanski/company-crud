@@ -13,11 +13,16 @@ This project was created for testing
 
 ## Steps to start it in local
 
-1. Run composer update 
+1. Run composer install and update 
 ```composer
+composer install
 composer update
 ```
-2. Add credentials for your MySQL database in .env 
+2. Generate an application key
+```composer
+php artisan key:generate
+```
+3. Add credentials for your MySQL database in .env 
 ```composer
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
@@ -26,16 +31,16 @@ DB_DATABASE=< database name >
 DB_USERNAME=<database user>
 DB_PASSWORD=<database password>
 ```
-3. Run Migration with Seed 
+4. Run Migration with Seed 
 ```composer
 php artisan migrate --seed
 ```
-4. If you want to start on the begining you can run
+5. If you want to start on the begining you can run
 ```composer
 php artisan migrate:fresh --seed
 ```
 
-### Enjoy
+# Enjoy!
 
 ## License
 
