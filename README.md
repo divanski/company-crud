@@ -13,7 +13,11 @@ This project was created for testing
 
 ## Steps to start it in local
 
-1. Run composer update ```composer update```
+1. Run composer update 
+```composer
+    composer update
+```
+
 
 ## License
 
