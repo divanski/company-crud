@@ -45,7 +45,7 @@ class CompanyService
      */
     public function syncGroups($company, $groupIds)
     {
-        if (!empty($groupIds)) {
+        if (filled($groupIds)) {
             $groupIds = array_map('intval', explode(',', $groupIds));
             $this->companyRepository->syncGroups($company, $groupIds);
         } else {

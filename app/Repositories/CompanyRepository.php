@@ -33,8 +33,10 @@ class CompanyRepository extends BaseRepository
      */
     public function storeOrUpdateCompany($data)
     {
-        if (isset($data['company_id'])) {
-            return $this->model->updateOrCreate(['id' => $data['company_id']], $data);
+        $companyId = data_get($data, 'company_id');
+
+        if (filled($companyId)) {
+            return $this->model->updateOrCreate(['id' => $companyId], $data);
         } else {
             return $this->model->create($data);
         }
